@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE COMMONWEALTH MEMBERSHIP REGISTRATION FORM</title>
+    
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="membershipGrouping">
+        <div class="fHeadings text-center">
+            <img src="coloredLogo.PNG" class="cLogo" alt="Logo">
+            <br><h2><b>THE COMMONWEALTH</b></h2>
+            <h3><span style="font-size: 1em;"><b>Membership Registration Form</b></span></h3>
+        </div>
+
+        <form id="memberform" action="member.php" method="POST" enctype="multipart/form-data">
+           
+            <input type="hidden" name="id" id="memberId">
+
+            <div class="fDetail mb-3">
+                <label for="title" id="lbl">Title</label>
+                <select class="form-select" name="title" id="title">
+                    <option value="Mr">Mr.</option>
+                    <option value="Mrs">Mrs.</option>
+                    <option value="Miss">Miss</option>
+                </select>  
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="fullname" id="lbl">Your Full Name <span style="color: red;">*</span></label> 
+                <div class="input-group">
+                    <span class="input-group-text">Person</span>
+                    <input type="text" name="fullName" class="form-control" placeholder="Type in your full Name" required>
+                </div>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="picture-upload" id="lbl">Passport Size Picture</label>
+                <input type="file" class="form-control" id="picture-upload" name="picture" accept="image/*">
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="gender" id="lbl">Gender <span style="color: red;">*</span></label>
+                <select class="form-select" name="gender" id="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>  
+            </div>    
+
+            <div class="fDetail mb-3">
+                <label for="dob" id="lbl">Date of Birth <span style="color: red;">*</span></label>
+                <input type="date" class="form-control" id="dob" name="dob" required>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="number" id="lbl">Phone Number <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="number" id="number" placeholder="Type in your telephone number" required>
+            </div>
+            
+            <div class="fDetail mb-3">
+                <label for="email" id="lbl">Email Address <span style="color: red;">*</span></label>
+                <div class="input-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Type in your email address" required>
+                    <span class="input-group-text">@example.com</span>
+                </div>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="address" id="lbl">Residential Address <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="Type in your residential address" required>
+            </div>    
+
+            <div class="fDetail mb-3">
+                <label for="maritalStatus" id="lbl">Marital Status</label>
+                <select class="form-select" name="maritalStatus" id="maritalStatus">
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                </select>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="nationality" id="lbl">Nationality <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="nationality" id="nationality" placeholder="Tell us your nationality" required>
+            </div>    
+
+            <div class="fDetail mb-3">
+                <label for="education" id="lbl">Educational Level</label>
+                <select class="form-select" name="education" id="education">
+                    <option value="basic_education">Basic Education</option>
+                    <option value="secondary_education">Secondary Education</option>
+                    <option value="tertiary_education">Tertiary Education</option>
+                </select>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="profession" id="lbl">Profession</label>
+                <input type="text" class="form-control" name="profession" id="profession" placeholder="What is your profession?">
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="emergencyContactName" id="lbl">Name of Emergency Contact <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="emergencyContactName" id="emergencyContactName" placeholder="Who is your Emergency Contact?" required>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="emergencyContact" id="lbl">Emergency Contact <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="emergencyContact" id="emergencyContact" placeholder="Type in the contact of your point of emergency contact" required>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label for="t360" id="lbl">Name of your T360 <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="t360" id="t360" placeholder="Your T360" required>
+            </div>
+
+            <div class="fDetail mb-3">
+                <label id="lbl">Stewardship Groups</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="music">
+                    </div>
+                    <label class="form-control">Music Department</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="media">
+                    </div>
+                    <label class="form-control">Media Department</label>
+                </div>        
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="hospitality">
+                    </div>
+                    <label class="form-control">Hospitality Department</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="fragrance">
+                    </div>
+                    <label class="form-control">Fragrance Department</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="fi">
+                    </div>
+                    <label class="form-control">First Impression</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="editorial_board">
+                    </div>
+                    <label class="form-control">Editorial Board</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input type="checkbox" name="stewardshipGroups[]" value="vm">
+                    </div>
+                    <label class="form-control">Venue Management</label>
+                </div>                        
+            </div>
+
+            <button type="submit" class="mfButton" name="submit">Submit</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Christ Commonwealth Community Membership Registration System</p>
+    </footer>
+
+    <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

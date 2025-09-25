@@ -1,0 +1,82 @@
+                <h2>Members List</h2>
+
+            <div class="table-area">
+            <table id="registrationsTable">
+                <thead>
+                    <tr style="background: #b2b2b2; color:white;">
+                        <th>Title</th>
+                        <th class="fixed-column">Full Name</th>
+                        <th>Picture</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Residential Address</th>
+                        <th>Marital Status</th>
+                        <th>Nationality</th>
+                        <th>Education Level</th>
+                        <th>Profession</th>
+                        <th>Name of Emergency Contact</th>
+                        <th>Emergency Contact</th>
+                        <th>Team Name</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTableBody"></tbody>
+            </table>
+            </div>
+
+async function loadMembers() {
+    try{
+    const response = await fetch('member.php');
+    const members =await response.json();
+
+    const tableBody =document.getElementById('membersTableBody');
+    tableBody.innerHTML = '';
+
+    members.forEach(member => {
+        let row = document.createElement('tr');
+
+        row.innerHTML = `
+        <td>${member.title}</td>
+        <td>${member.fullName}</td>
+        <td><img src="${member.picture}" alt="${mmember.fullName}'s Picture" style="width:100px; height:auto;"></td>
+        <td>${member.gender}</td>
+        <td>${member.dob}</td>
+        <td>${member.phone}</td>
+        <td>${member.email}</td>
+        <td>${member.address}</td>
+        <td>${member.maritalStatus}</td>
+        <td>${member.nationality}</td>
+        <td>${member.education}</td>
+        <td>${member.profession}</td>
+        <td>${member.emergencyContact}</td>
+        <td>${member.team}</td>
+        <td>${member.department ?
+            member.department.split(', ').join(', ') : ''}</td>
+        <td>
+        <td>
+        <button onclick="editMembers(${member.id})">Edit</button>
+        <button onclick="deleteMember(${member.id})">Delete</button>
+        </td>
+        `;
+        tableBody.appendChild(row);
+    });
+} catch (err) {
+    console.error("Error loading members:", err);
+}
+}
+
+    function editMember(id) {
+        window.location.href = `mForm.php?id=${id}`;
+    }
+
+    async function deleteMember(id) {
+        if (!confirm("Are you sure you want to delete this member?")) return;
+
+        await fetch(`member.php?id=${id}`, { method: 'DELETE' });
+        loadMembers();
+    }
+
+
+document.addEventListener("DOMContentLoaded", loadMembers);

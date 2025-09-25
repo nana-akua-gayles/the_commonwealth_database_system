@@ -1,3 +1,14 @@
+<?php
+session_start(); 
+
+
+$message = '';
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']); 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,9 +28,16 @@
             <h3><span style="font-size: 1em;"><b>Membership Registration Form</b></span></h3>
         </div>
 
+        <?php if (!empty($message)): ?>
+
+              <div class="alert alert-primary alert-dismissible fade show">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <?= $message ?></div>
+        <?php endif; ?>
+
         <form id="memberform" action="member.php" method="POST" enctype="multipart/form-data">
-           
             <input type="hidden" name="id" id="memberId">
+
 
             <div class="fDetail mb-3">
                 <label for="title" id="lbl">Title</label>
@@ -108,13 +126,43 @@
 
             <div class="fDetail mb-3">
                 <label for="emergencyContact" id="lbl">Emergency Contact <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" name="emergencyContact" id="emergencyContact" placeholder="Type in the contact of your point of emergency contact" required>
+                <input type="text" class="form-control" name="emergencyContact" id="emergencyContact" placeholder="Type in the contact details for your emergency contact" required>
             </div>
 
-            <div class="fDetail mb-3">
-                <label for="t360" id="lbl">Name of your T360 <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" name="t360" id="t360" placeholder="Your T360" required>
+                <div class="fDetail mb-3">
+                <label for="fellowship" id="lbl">Are you in a fellowship? <span style="color: red;">*</span></label>
+                <select class="form-select" name="fellowship" id="fellowship" onchange="toggleFellowshipOptions()">
+                    <option value="">Are you in a fellowship?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+            </div>        
+
+            <div id="fellowshipOptions" style="display: none;">
+                <div class="fDetail mb-3">
+                    <label for="fellowshipName" id="lbl">Your Fellowship</label>
+                    <select class="form-select" name="fellowshipName" id="fellowshipName" onchange="updatet360()">
+                        <option value="">Find your fellowship headed by the esteemed leaders</option>
+                        <option disabled>Pastor Mitchell</option>
+                        <option value="fellowship1">Pokuase City</option>
+                        <option disabled>Deacon Edward Atiase</option>
+                        <option value="fellowship2">Metamorphoo ATU</option>
+                        <option disabled>Deacon Daniel F. Agbosu</option>
+                        <option value="fellowship3">Metamorphoo Executives</option>
+                        <option disabled>Minister Prince S. Tetteh</option>
+                        <option value="fellowship4">Metamorphoo Legon</option>
+                    </select>
+                </div>
+
+                <div class="fDetail mb-3">
+                    <label for="t360" id="lbl">Your T360</label>
+                    <select class="form-select" name="t360" id="t360">
+                        <option value="">Choose your T360</option>
+                    </select>
+                </div>
+
             </div>
+
 
             <div class="fDetail mb-3">
                 <label id="lbl">Stewardship Groups</label>
@@ -177,5 +225,53 @@
     </footer>
 
     <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleFellowshipOptions() {
+        const fellowshipSelect = document.getElementById('fellowship');
+        const fellowshipOptions = document.getElementById('fellowshipOptions');
+        
+        if (fellowshipSelect.value === 'yes') {
+            fellowshipOptions.style.display = 'block';
+        } else {
+            fellowshipOptions.style.display = 'none';
+            document.getElementById('fellowshipName').value = ''; 
+            document.getElementById('t360').innerHTML = '<option value="">Choose your T360</option>'; 
+        }
+    }
+
+    function updatet360() {  // Fixed function name to match HTML
+        const fellowship = document.getElementById('fellowshipName').value;
+        const t360Select = document.getElementById('t360');
+
+        // Clear previous options
+        t360Select.innerHTML = '<option value="">Choose your T360</option>';
+
+        // Populate T360 based on selected fellowship
+        if (fellowship === 'fellowship1') {
+            t360Select.innerHTML += `
+                <option value="t360_1A">T360 Team 1A</option>
+                <option value="t360_1B">T360 Team 1B</option>
+            `;
+        } else if (fellowship === 'fellowship2') {
+            t360Select.innerHTML += `
+                <option value="t360_2A">T360 Team 2A</option>
+                <option value="t360_2B">T360 Team 2B</option>
+            `;
+        } else if (fellowship === 'fellowship3') {
+            t360Select.innerHTML += `
+                <option value="t360_3A">T360 Team 3A</option>
+                <option value="t360_3B">T360 Team 3B</option>
+            `;
+        } else if (fellowship === 'fellowship4') {
+            t360Select.innerHTML += `
+                <option value="t360_TeamSupernatural">Team Supernatural</option>
+                <option value="t360_TeamGrace">Team GRACE</option>
+                <option value="t360_TeamGMA">Team God's Mighty Army</option>
+                <option value="t360_TeamAmbassadors">Team Ambassadors</option>
+                <option value="t360_TeamGR">Team Glory Reigns</option>
+            `;
+        }
+    }
+</script>
 </body>
 </html>

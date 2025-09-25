@@ -1,16 +1,14 @@
 <?php
+session_start(); // Start the session
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle form submission
-} else {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo "Method Not Allowed";
     exit;
 }
-
 
 $host = "localhost";
 $user = "root";
@@ -63,15 +61,26 @@ maritalStatus, nationality, education, profession, emergencyContactName, emergen
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssssssssss", $title, $fullName, $picture, $gender, $dob, $phone, $email, $address, $maritalStatus, $nationality, 
-$education, $profession, $emergencyContactName, $emergencyContact, $t360, $stewardshipGroups);
-
-if ($stmt->execute()) {
-    echo "Registration Successful!";
+if ($stmt) {
+    $stmt->bind_param("ssssssssssssssss", $title, $fullName, $picture, $gender, $dob, $phone, $email, $address, $maritalStatus, $nationality, 
+    $education, $profession, $emergencyContactName, $emergencyContact, $t360, $stewardshipGroups);
+    
+    // Execute the statement
+    if ($stmt->execute()) {
+        // Set the success message in session
+        $_SESSION['message'] =  "<strong>CONGRATULATIONS!</strong> You have successfully been registered into The Commonwealth Fold!";
+    } else {
+        $_SESSION['message'] = "Error: " . $stmt->error;
+    }
+    
+    $stmt->close();
 } else {
-    echo "Error: " . $stmt->error;
+    $_SESSION['message'] = "Error preparing statement: " . $conn->error;
 }
 
-$stmt->close();
-$conn->close();     
+$conn->close(); 
+
+// Redirect back to the form
+header("Location: membershipform.php");
+exit();
 ?>

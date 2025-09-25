@@ -451,7 +451,6 @@ footer{
     background: rgb(240, 21, 105);
     color: white;
     position: relative;
-    bottom: 0;
     font-size: 1em;
     width: 100%;
 }

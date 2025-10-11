@@ -25,17 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->fetch();
     $stmt->close();
 
-    // Hash the entered password using SHA-256
-    $hashedInputPassword = hash('sha256', $password);
-
-    // Verify the password
-    if ($hashedInputPassword === $hashedPassword) {
+    // Verify the password using password_verify
+    if (isset($hashedPassword) && password_verify($password, $hashedPassword)) {
         // Successful login
         $_SESSION['user_id'] = $userId;
         header("Location: overview.php"); // Redirect to overview.php
         exit();
     } else {
-        echo "Invalid username or password.";
+        // Invalid login
+        $_SESSION['message'] = "Invalid username or password.";
+        header("Location: signup.php"); // Redirect back to login page
+        exit();
     }
 }
 

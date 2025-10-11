@@ -50,6 +50,8 @@ $education = $_POST['education'] ?? '';
 $profession = $_POST['profession'] ?? '';
 $emergencyContactName = $_POST['emergencyContactName'] ?? '';
 $emergencyContact = $_POST['emergencyContact'] ?? '';
+$fellowship = $_POST['fellowship'];
+$fellowshipName = $_POST['fellowshipName'];
 $t360 = $_POST['t360'] ?? '';
 
 // Handle stewardship groups
@@ -57,13 +59,14 @@ $stewardshipGroups = isset($_POST['stewardshipGroups']) ? implode(", ", $_POST['
 
 // Prepare the SQL statement
 $sql = "INSERT INTO registry (title, fullName, picture, gender, dob, phone, email, address, 
-maritalStatus, nationality, education, profession, emergencyContactName, emergencyContact, t360, stewardshipGroups)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+maritalStatus, nationality, education, profession, emergencyContactName, emergencyContact,
+ fellowship, fellowshipName, t360, stewardshipGroups)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if ($stmt) {
-    $stmt->bind_param("ssssssssssssssss", $title, $fullName, $picture, $gender, $dob, $phone, $email, $address, $maritalStatus, $nationality, 
-    $education, $profession, $emergencyContactName, $emergencyContact, $t360, $stewardshipGroups);
+    $stmt->bind_param("ssssssssssssssssss", $title, $fullName, $picture, $gender, $dob, $phone, $email, $address, $maritalStatus, $nationality, 
+    $education, $profession, $emergencyContactName, $emergencyContact, $fellowship, $fellowshipName, $t360, $stewardshipGroups);
     
     // Execute the statement
     if ($stmt->execute()) {

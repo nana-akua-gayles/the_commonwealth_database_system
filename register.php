@@ -1,52 +1,41 @@
 <?php
+session_start(); // Start the session
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$db = "acessregistry_db";
+// Database configuration
+$servername = "localhost"; // Change if necessary
+$username = "root"; // Change if necessary
+$password = ""; // Change if necessary
+$dbname = "acessregistry_db"; // Change to your database name
 
-// Create Connection
-$conn = new mysqli($host, $user, $password, $db);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check Connection
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle form Submission
+// Check if form is submitted
 if (isset($_POST['signup'])) {
-    $fullname = htmlspecialchars(trim($_POST['fullname']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $phone = htmlspecialchars(trim($_POST['phone']));
-    $role = htmlspecialchars(trim($_POST['role']));
+    $fullname = $conn->real_escape_string($_POST['fullname']);
+    $username = $conn->real_escape_string($_POST['username']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $phone = $conn->real_escape_string($_POST['phone']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $role = $conn->real_escape_string($_POST['role']);
 
-    // Check for existing email
-    $checkEmail = $conn->prepare("SELECT id FROM leadersaccess WHERE email = ?");
-    $checkEmail->bind_param("s", $email);
-    $checkEmail->execute();
-    $checkEmail->store_result();
+    // SQL query to insert data into pending_users table
+    $sql = "INSERT INTO pending_leadersaccess (fullname, username, email, phone, password, role) VALUES ('$fullname', '$username', '$email', '$phone', '$password', '$role')";
 
-    if ($checkEmail->num_rows > 0) {
-        echo "<script>alert('This Email is already registered. Please Login instead.');
-        window.history.back();</script>";
+    // Execute the query and check if successful
+    if ($conn->query($sql) === TRUE) {
+        // Redirect to signup.php
+        header("Location: signup.php");
+        exit(); // Ensure no further code is executed
     } else {
-        // Insert into the pending registrations table
-        $stmt = $conn->prepare("INSERT INTO pending_leadersaccess (fullname, email, phone, role) VALUES (?, ?, ?, ?)");
-        if ($stmt) {
-            $stmt->bind_param("ssss", $fullname, $email, $phone, $role);
-            if ($stmt->execute()) {
-                echo "<script>alert('Registration Successful! Your request is pending admin approval.');
-                window.location.href='login.php';</script>";
-            } else {
-                error_log("Execution error: " . $stmt->error);
-            }
-            $stmt->close();
-        } else {
-            error_log("Statement preparation error: " . $conn->error);
-        }
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-    $checkEmail->close();
-    $conn->close();
 }
+
+$conn->close();
 ?>

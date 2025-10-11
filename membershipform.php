@@ -14,7 +14,7 @@ if (isset($_SESSION['message'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE COMMONWEALTH MEMBERSHIP REGISTRATION FORM</title>
+    <title>THE COMMONWEALTH REGISTRATION FORM</title>
     
     <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
@@ -24,7 +24,7 @@ if (isset($_SESSION['message'])) {
     <div class="membershipGrouping">
         <div class="fHeadings text-center">
             <img src="coloredLogo.PNG" class="cLogo" alt="Logo">
-            <br><h2><b>THE COMMONWEALTH</b></h2>
+            <br><br><h2><b>THE COMMONWEALTH</b></h2>
             <h3><span style="font-size: 1em;"><b>Membership Registration Form</b></span></h3>
         </div>
 
@@ -42,6 +42,7 @@ if (isset($_SESSION['message'])) {
             <div class="fDetail mb-3">
                 <label for="title" id="lbl">Title</label>
                 <select class="form-select" name="title" id="title">
+                    <option value="">-- Choose a Title --</option>
                     <option value="Mr">Mr.</option>
                     <option value="Mrs">Mrs.</option>
                     <option value="Miss">Miss</option>
@@ -95,6 +96,7 @@ if (isset($_SESSION['message'])) {
             <div class="fDetail mb-3">
                 <label for="maritalStatus" id="lbl">Marital Status</label>
                 <select class="form-select" name="maritalStatus" id="maritalStatus">
+                    <option value="">Are you single or married?</option>
                     <option value="single">Single</option>
                     <option value="married">Married</option>
                 </select>
@@ -108,6 +110,7 @@ if (isset($_SESSION['message'])) {
             <div class="fDetail mb-3">
                 <label for="education" id="lbl">Educational Level</label>
                 <select class="form-select" name="education" id="education">
+                    <option value="">-- Choose your level of education --</option>
                     <option value="basic_education">Basic Education</option>
                     <option value="secondary_education">Secondary Education</option>
                     <option value="tertiary_education">Tertiary Education</option>
@@ -144,13 +147,13 @@ if (isset($_SESSION['message'])) {
                     <select class="form-select" name="fellowshipName" id="fellowshipName" onchange="updatet360()">
                         <option value="">Find your fellowship headed by the esteemed leaders</option>
                         <option disabled>Pastor Mitchell</option>
-                        <option value="fellowship1">Pokuase City</option>
+                        <option value="pokuaseCity">Pokuase City</option>
                         <option disabled>Deacon Edward Atiase</option>
-                        <option value="fellowship2">Metamorphoo ATU</option>
+                        <option value="metamorphooATU">Metamorphoo ATU</option>
                         <option disabled>Deacon Daniel F. Agbosu</option>
-                        <option value="fellowship3">Metamorphoo Executives</option>
+                        <option value="metamorphooExecutives">Metamorphoo Executives</option>
                         <option disabled>Minister Prince S. Tetteh</option>
-                        <option value="fellowship4">Metamorphoo Legon</option>
+                        <option value="metamorphooLegon">Metamorphoo Legon</option>
                     </select>
                 </div>
 
@@ -247,28 +250,28 @@ if (isset($_SESSION['message'])) {
         t360Select.innerHTML = '<option value="">Choose your T360</option>';
 
         // Populate T360 based on selected fellowship
-        if (fellowship === 'fellowship1') {
+        if (fellowship === 'pokuaseCity') {
             t360Select.innerHTML += `
                 <option value="t360_1A">T360 Team 1A</option>
                 <option value="t360_1B">T360 Team 1B</option>
             `;
-        } else if (fellowship === 'fellowship2') {
+        } else if (fellowship === 'metamorphooATU') {
             t360Select.innerHTML += `
                 <option value="t360_2A">T360 Team 2A</option>
                 <option value="t360_2B">T360 Team 2B</option>
             `;
-        } else if (fellowship === 'fellowship3') {
+        } else if (fellowship === 'metamorphooExecutives') {
             t360Select.innerHTML += `
                 <option value="t360_3A">T360 Team 3A</option>
                 <option value="t360_3B">T360 Team 3B</option>
             `;
-        } else if (fellowship === 'fellowship4') {
+        } else if (fellowship === 'metamorphooLegon') {
             t360Select.innerHTML += `
-                <option value="t360_TeamSupernatural">Team Supernatural</option>
-                <option value="t360_TeamGrace">Team GRACE</option>
-                <option value="t360_TeamGMA">Team God's Mighty Army</option>
-                <option value="t360_TeamAmbassadors">Team Ambassadors</option>
-                <option value="t360_TeamGR">Team Glory Reigns</option>
+                <option value="TeamSupernatural">Team Supernatural</option>
+                <option value="TeamGrace">Team GRACE</option>
+                <option value="TeamGod'sMightyArmy">Team God's Mighty Army</option>
+                <option value="TeamAmbassadors">Team Ambassadors</option>
+                <option value="TeamGloryReigns">Team Glory Reigns</option>
             `;
         }
     }

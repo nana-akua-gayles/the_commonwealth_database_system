@@ -1,43 +1,45 @@
 <?php
-session_start(); 
+// Database connection
+$servername = "localhost"; 
+$username = "root";         
+$password = "";             
+$dbname = "acessregistry_db";  
 
-$host = "localhost";
-$user = "root"; 
-$password = ""; 
-$db = "acessregistry_db";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-$conn = new mysqli($host, $user, $password, $db);
-
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle login form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Process login
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Prepare and execute the SQL statement to fetch user details
-    $stmt = $conn->prepare("SELECT id, password FROM leadersaccess WHERE username = ?");
+    $sql = "SELECT * FROM leadersaccess WHERE username = ?";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $stmt->bind_result($userId, $hashedPassword);
-    $stmt->fetch();
-    $stmt->close();
 
-    // Verify the password using password_verify
-    if (isset($hashedPassword) && password_verify($password, $hashedPassword)) {
-        // Successful login
-        $_SESSION['user_id'] = $userId;
-        header("Location: overview.php"); // Redirect to overview.php
-        exit();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            session_start();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            header("Location: overview.php");
+            exit();
+        } else {
+            echo "Invalid password.";
+        }
     } else {
-        // Invalid login
-        $_SESSION['message'] = "Invalid username or password.";
-        header("Location: signup.php"); // Redirect back to login page
-        exit();
+        echo "User not found.";
     }
-}
 
+    $stmt->close();
+}
 $conn->close();
 ?>

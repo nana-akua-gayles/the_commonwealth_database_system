@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE COMMONWEALTH REGISTRATION SYSTEM</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="mrC">
+        <img src="coloredLogo.PNG" class="indexLogo">
+    <h1 class="ih1">THE COMMONWEALTH MEMBERSHIP REGISTRATION</h1>
+
+    <div>
+        <p>Welcome To The Commonwealth Membership Registration System. </p>
+
+        <p style="color: #7a288a; font-style: italic;">Our Community is a warm and welcoming space where hearts and minds 
+        unite in worship, service, and love.
+        By filling out a membership form, you're taking a bold step 
+        into a family committed to growing in faith together. </p>
+    </div><br><br>
+
+    <p>Please select a tab to continue.</p>
+
+    <div class="bOptions">
+            <a href="membershipform.php" class="mrLink">MEMBERSHIP REGISTRATION</a>
+            <a href="signup.php" class="mrLink">ACCESS ADMIN DASHBOARD</a>
+    </div>
+
+</div>
+<script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

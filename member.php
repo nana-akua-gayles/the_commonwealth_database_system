@@ -41,7 +41,7 @@ $title = $_POST['title'] ?? '';
 $fullName = $_POST['fullName'] ?? '';
 $gender = $_POST['gender'] ?? '';
 $dob = $_POST['dob'] ?? '';
-$phone = $_POST['number'] ?? '';
+$number = $_POST['number'] ?? '';
 $email = $_POST['email'] ?? '';
 $address = $_POST['address'] ?? '';
 $maritalStatus = $_POST['maritalStatus'] ?? '';
@@ -50,23 +50,25 @@ $education = $_POST['education'] ?? '';
 $profession = $_POST['profession'] ?? '';
 $emergencyContactName = $_POST['emergencyContactName'] ?? '';
 $emergencyContact = $_POST['emergencyContact'] ?? '';
+$network = $_POST['network'];
 $fellowship = $_POST['fellowship'];
-$fellowshipName = $_POST['fellowshipName'];
-$t360 = $_POST['t360'] ?? '';
+$t360s = $_POST['t360s'] ?? '';
 
-// Handle stewardship groups
-$stewardshipGroups = isset($_POST['stewardshipGroups']) ? implode(", ", $_POST['stewardshipGroups']) : "";   
+// Handle stewardship groups & functions
+$function = isset($_POST['function']) ? implode(", ", array: $_POST['function']) : "";   
+
+$stewardshipGroups = isset($_POST['stewardshipGroups']) ? implode(", ", array: $_POST['stewardshipGroups']) : "";   
 
 // Prepare the SQL statement
-$sql = "INSERT INTO registry (title, fullName, picture, gender, dob, phone, email, address, 
-maritalStatus, nationality, education, profession, emergencyContactName, emergencyContact,
- fellowship, fellowshipName, t360, stewardshipGroups)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO registry (title, fullName, picture, gender, dob, number, email, address, 
+maritalStatus, nationality, education, profession, emergencyContactName, emergencyContact, network, 
+fellowship, t360s, function, stewardshipGroups)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if ($stmt) {
-    $stmt->bind_param("ssssssssssssssssss", $title, $fullName, $picture, $gender, $dob, $phone, $email, $address, $maritalStatus, $nationality, 
-    $education, $profession, $emergencyContactName, $emergencyContact, $fellowship, $fellowshipName, $t360, $stewardshipGroups);
+    $stmt->bind_param("sssssssssssssssssss", $title, $fullName, $picture, $gender, $dob, $number, $email, $address, $maritalStatus, $nationality, 
+    $education, $profession, $emergencyContactName, $emergencyContact, $network, $fellowship, $t360s, $function, $stewardshipGroups);
     
     // Execute the statement
     if ($stmt->execute()) {

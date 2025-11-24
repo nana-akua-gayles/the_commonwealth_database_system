@@ -121,9 +121,9 @@ if (isset($_SESSION['message'])) {
                 <label for="education" id="lbl">Educational Level:</label>
                 <select class="form-select" name="education" id="education">
                     <option value="">-- Choose your level of education --</option>
-                    <option value="basic_education">Basic Education</option>
-                    <option value="secondary_education">Secondary Education</option>
-                    <option value="tertiary_education">Tertiary Education</option>
+                    <option value="Basic Education">Basic Education</option>
+                    <option value="Secondary Education">Secondary Education</option>
+                    <option value="Tertiary Education">Tertiary Education</option>
                 </select>
             </div>
 
@@ -133,97 +133,144 @@ if (isset($_SESSION['message'])) {
             </div>
 
             <div class="fDetail mb-3">
-                <label for="emergencyContactName" id="lbl">Name of Emergency Contact: <span style="color: red;">*</span></label>
+                <label for="emergencyContactName" id="lbl">Next of Kin: <span style="color: red;">*</span></label>
                 <input type="text" class="form-control" name="emergencyContactName" id="emergencyContactName" placeholder="Who is your Emergency Contact?" required>
             </div>
 
             <div class="fDetail mb-3">
-                <label for="emergencyContact" id="lbl">Emergency Contact: <span style="color: red;">*</span></label>
+                <label for="emergencyContact" id="lbl">Contact of Next of Kin: <span style="color: red;">*</span></label>
                 <input type="text" class="form-control" name="emergencyContact" id="emergencyContact" placeholder="Type in the contact details for your emergency contact" required>
             </div>
 
-                <div class="fDetail mb-3">
-                <label for="fellowship" id="lbl">Are you in a fellowship? <span style="color: red;">*</span></label>
-                <select class="form-select" name="fellowship" id="fellowship" onchange="toggleFellowshipOptions()">
-                    <option value="">Are you in a fellowship?</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+            <div class="fDetail mb-3">
+                <label for="network" id="lbl">Which Network are you in? <span style="color: red;">*</span></label>
+                <select class="form-select" name="network" id="network" onchange="toggleFellowshipOptions()">
+                    <option value="">-- Choose your Network --</option>
+                    <option value="Accra">Accra</option>
+                    <option value="Kumasi">Kumasi</option>
+                    <option value="Ho">Ho</option>
                 </select>  
-            </div>        
-
-            <div id="fellowshipOptions" style="display: none;">
-                <div class="fDetail mb-3">
-                    <label for="fellowshipName" id="lbl">Your Fellowship:</label>
-                    <select class="form-select" name="fellowshipName" id="fellowshipName" onchange="updatet360()">
-                        <option value="">Find your fellowship headed by the esteemed leaders</option>
-                        <option disabled>Pastor Mitchell</option>
-                        <option value="pokuaseCity">Pokuase City</option>
-                        <option disabled>Deacon Edward Atiase</option>
-                        <option value="metamorphooATU">Metamorphoo ATU</option>
-                        <option disabled>Deacon Daniel F. Agbosu</option>
-                        <option value="metamorphooExecutives">Metamorphoo Executives</option>
-                        <option disabled>Minister Prince S. Tetteh</option>
-                        <option value="metamorphooLegon">Metamorphoo Legon</option>
-                    </select>
-                </div>
-
-                <div class="fDetail mb-3">
-                    <label for="t360" id="lbl">Your T360</label>
-                    <select class="form-select" name="t360" id="t360">
-                        <option value="">Choose your T360</option>
-                    </select>
-                </div>
-
             </div>
 
+            <div id="fellowshipContainer" class="hidden">
+                <div class="fDetail mb-3">
+                    <label for="fellowship" id="lbl">Your Fellowship:</label>
+                    <select class="form-select" id="fellowship" name="fellowship" onchange="showT360sOptions()">
+                        <option value="">Find your fellowship headed by the esteemed leaders</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="t360sContainer" class="hidden">
+                <div class="fDetail mb-3">
+                    <label for="t360s" id="lbl">Choose your T360:</label>
+                    <select class="form-select" id="t360s" name="t360s">
+                        <option value="">Select your T360</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fDetail mb-3">
+            <label id="lbl">What function do you serve? Select all that applies...</label>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="Pastor">
+                </div>
+                <label class="form-control">Pastor</label>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="Deacon">
+                </div>
+                <label class="form-control">Deacon</label>
+            </div>
+        
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="Deaconess">
+                </div>
+                <label class="form-control">Deaconess</label>
+            </div>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="Network Leader">
+                </div>
+                <label class="form-control">Network Leader</label>
+            </div>            
+
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="Fellowship Leader">
+                </div>
+                <label class="form-control">Fellowship Leader</label>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="T360 Leader">
+                </div>
+                <label class="form-control">T360 Leader</label>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input type="checkbox" name="function[]" value="Stewardship Leader">
+                </div>
+                <label class="form-control">Stewardship Group Leader</label>
+            </div>
+            </div>      
 
             <div class="fDetail mb-3">
                 <label id="lbl">Stewardship Groups:</label>
+                
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="music">
+                        <input type="checkbox" name="stewardshipGroups[]" value="Music">
                     </div>
                     <label class="form-control">Music Department</label>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="media">
+                        <input type="checkbox" name="stewardshipGroups[]" value="Media">
                     </div>
                     <label class="form-control">Media Department</label>
                 </div>        
 
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="hospitality">
+                        <input type="checkbox" name="stewardshipGroups[]" value="Hospitality">
                     </div>
                     <label class="form-control">Hospitality Department</label>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="fragrance">
+                        <input type="checkbox" name="stewardshipGroups[]" value="Fragrance">
                     </div>
                     <label class="form-control">Fragrance Department</label>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="fi">
+                        <input type="checkbox" name="stewardshipGroups[]" value="First Impression">
                     </div>
                     <label class="form-control">First Impression</label>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="editorial_board">
+                        <input type="checkbox" name="stewardshipGroups[]" value="Editorial Board">
                     </div>
                     <label class="form-control">Editorial Board</label>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input type="checkbox" name="stewardshipGroups[]" value="vm">
+                        <input type="checkbox" name="stewardshipGroups[]" value="Venue Management">
                     </div>
                     <label class="form-control">Venue Management</label>
                 </div>                        
@@ -238,53 +285,91 @@ if (isset($_SESSION['message'])) {
     </footer>
 
     <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    
+
     <script>
-    function toggleFellowshipOptions() {
-        const fellowshipSelect = document.getElementById('fellowship');
-        const fellowshipOptions = document.getElementById('fellowshipOptions');
-        
-        if (fellowshipSelect.value === 'yes') {
-            fellowshipOptions.style.display = 'block';
-        } else {
-            fellowshipOptions.style.display = 'none';
-            document.getElementById('fellowshipName').value = ''; 
-            document.getElementById('t360').innerHTML = '<option value="">Choose your T360</option>'; 
+                //SCRIPT FOR THE FELLOWSHIP AND T360s
+        const fellowships = {
+            Accra: [
+                { name: "Pastor Mitchell", disabled: true },
+                { name: "Pokuase City", disabled: false },
+                { name: "Deacon Edward Atiase", disabled: true },
+                { name: "Metamorphoo ATU", disabled: false },
+                { name: "Deacon Daniel Fafa Agbosu", disabled: true },
+                { name: "Metamorphoo Executives", disabled: false },
+                { name: "Minister Prince Semanu Tetteh", disabled: true },
+                { name: "Metamorphoo Legon", disabled: false }
+            ],
+            Kumasi: [
+                { name: "Leader C", disabled: true },
+                { name: "Fellowship C", disabled: false },
+                { name: "Fellowship D", disabled: false }
+            ],
+            Ho: [
+                { name: "Leader E", disabled: true },
+                { name: "Fellowship E", disabled: false },
+                { name: "Fellowship F", disabled: false }
+            ]
+        };
+
+        const t360sOptions = {
+            "Pokuase City": ["Team Auxanos", "Team Phronesis"],
+            "Metamorphoo ATU": ["T360 B1", "T360 B2"],
+            "Metamorphoo Executives": ["T360 B1", "T360 B2"],
+            "Metamorphoo Legon": ["Team Supernatural", "Team Grace", "Team God's Mighty Army",
+             "Team Ambassadors", "Team Glory Reigns", "Team City of Jedidiah"],
+            "Fellowship C": ["T360 C1", "T360 C2"],
+            "Fellowship D": ["T360 D1", "T360 D2"],
+            "Fellowship E": ["T360 E1", "T360 E2"],
+            "Fellowship F": ["T360 F1", "T360 F2"]
+        };
+
+        function toggleFellowshipOptions() {
+            const networkSelect = document.getElementById('network');
+            const fellowshipContainer = document.getElementById('fellowshipContainer');
+
+            if (networkSelect.value) {
+                fellowshipContainer.classList.remove('hidden');
+                showFellowshipOptions();
+            } else {
+                fellowshipContainer.classList.add('hidden');
+                document.getElementById('t360sContainer').classList.add('hidden'); // Hide T360s if network is not selected
+                document.getElementById('fellowship').innerHTML = '<option value="">Find your fellowship headed by the esteemed leaders</option>'; // Reset fellowship options
+            }
         }
-    }
 
-    function updatet360() {  // Fixed function name to match HTML
-        const fellowship = document.getElementById('fellowshipName').value;
-        const t360Select = document.getElementById('t360');
+        function showFellowshipOptions() {
+            const networkSelect = document.getElementById('network');
+            const fellowshipSelect = document.getElementById('fellowship');
+            fellowshipSelect.innerHTML = '<option value="">Find your fellowship headed by the esteemed leaders</option>'; // Reset options
 
-        // Clear previous options
-        t360Select.innerHTML = '<option value="">Choose your T360</option>';
+            if (networkSelect.value) {
+                const selectedNetwork = networkSelect.value;
 
-        // Populate T360 based on selected fellowship
-        if (fellowship === 'pokuaseCity') {
-            t360Select.innerHTML += `
-                <option value="t360_1A">T360 Team 1A</option>
-                <option value="t360_1B">T360 Team 1B</option>
-            `;
-        } else if (fellowship === 'metamorphooATU') {
-            t360Select.innerHTML += `
-                <option value="t360_2A">T360 Team 2A</option>
-                <option value="t360_2B">T360 Team 2B</option>
-            `;
-        } else if (fellowship === 'metamorphooExecutives') {
-            t360Select.innerHTML += `
-                <option value="t360_3A">T360 Team 3A</option>
-                <option value="t360_3B">T360 Team 3B</option>
-            `;
-        } else if (fellowship === 'metamorphooLegon') {
-            t360Select.innerHTML += `
-                <option value="TeamSupernatural">Team Supernatural</option>
-                <option value="TeamGrace">Team GRACE</option>
-                <option value="TeamGod'sMightyArmy">Team God's Mighty Army</option>
-                <option value="TeamAmbassadors">Team Ambassadors</option>
-                <option value="TeamGloryReigns">Team Glory Reigns</option>
-            `;
+                fellowships[selectedNetwork].forEach(fellowship => {
+                    fellowshipSelect.innerHTML += `<option value="${fellowship.name}" ${fellowship.disabled ? 'disabled' : ''}>${fellowship.name}</option>`;
+                });
+            }
+            showT360sOptions(); // Reset T360s options when network changes
         }
-    }
+
+        function showT360sOptions() {
+            const fellowshipSelect = document.getElementById('fellowship');
+            const t360sSelect = document.getElementById('t360s');
+            const t360sContainer = document.getElementById('t360sContainer');
+            t360sSelect.innerHTML = '<option value="">Select your T360</option>'; // Reset options
+
+            if (fellowshipSelect.value) {
+                t360sContainer.classList.remove('hidden');
+                const selectedFellowship = fellowshipSelect.value;
+
+                t360sOptions[selectedFellowship].forEach(t360 => {
+                    t360sSelect.innerHTML += `<option value="${t360}">${t360}</option>`;
+                });
+            } else {
+                t360sContainer.classList.add('hidden');
+            }
+        }
 </script>
 </body>
 </html>
